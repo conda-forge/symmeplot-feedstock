@@ -1,4 +1,5 @@
 {% set name = "symmeplot" %}
+{% set python_min = "3.10" %}
 {% set version = "0.2.2" %}
 
 package:
@@ -16,18 +17,23 @@ build:
 
 requirements:
   host:
-    - python >=3.9
-    - poetry-core
+    - python {{ python_min }}.*
+    - hatchling
+    - hatch-vcs
     - pip
   run:
-    - python >=3.9.0
-    - sympy >=1.12.0
-    - numpy >=1.21.6
-    - matplotlib-base >=3.7.0
+    - python >={{ python_min }}
+    - sympy >=1.12
+    - numpy
 
 test:
   imports:
     - symmeplot
+  commands:
+    - pip check
+  requires:
+    - pip
+    - python {{ python_min }}.*
 
 about:
   home: https://github.com/tjstienstra/symmeplot
